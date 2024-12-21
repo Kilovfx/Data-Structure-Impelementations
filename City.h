@@ -1,9 +1,20 @@
-#ifndef CITY_H
-#define CITY_H
+#ifndef Country_H
+#define Country_H
 
 #include <string>
-
 using namespace std;
 
-// City structure
-struct Country
+// Country structure
+struct Country {
+
+string name;
+double x,y;
+int Population;
+
+//Constructor of data Country
+Country(const string &countryName, double xCoord, double yCoord, int countryPopulation) : name(Countryname), x(xCoord),y(yCoord),Population(countryPopulation) {}
+//Data Intialization 
+Country() : name("empty"), x(0.0), y(0.0), population(0) {}
+}
+
+#endif // COUNTRY_H
