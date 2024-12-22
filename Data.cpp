@@ -56,6 +56,7 @@ void Data::deleteCityByCoordinates(double xCoord, double yCoord) {
 
     // Use a loop to find the country with the matching coordinates
     for (int i = 0; i < countries.size(); ++i) {
+        //sequantial search to find . . .
         if (countries[i].x == xCoord && countries[i].y == yCoord) {
             // Remove the country from the list
             cout << "Country   |" << countries[i].name << "|  at coordinates (" 
