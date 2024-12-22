@@ -37,7 +37,6 @@ public:
     bool isExist(const string& countryName);
     //files 
     void saveCountryToFile(const vector<Country>& countries, const string &filename);
-
 };
 
 #endif // COUNTRYMANAGER_H
