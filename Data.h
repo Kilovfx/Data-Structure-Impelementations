@@ -22,6 +22,8 @@ public:
     //search function
     int binarySearchByName(const string& countryName);
     int binarySearchByCoordinates(double xCoord, double yCoord);
+    //sorts
+    void quickSortbyName(int left, int right);
     // Displays all countries
     void display();
     //functions to limit the errors
