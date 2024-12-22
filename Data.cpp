@@ -10,7 +10,7 @@ Data::~Data() {
     countries.clear();
 }
 
-
+//insert function
 void Data::insertCountry(const Country& country) {
     //Checking for country name empty 
     if (country.name.empty()) {
@@ -32,8 +32,12 @@ void Data::insertCountry(const Country& country) {
 bool Data::isEmpty() const {
     return countries.empty();
 }
+
+//isExist Checking function
 bool Data::isExist(const string& countryName) const {
+    //for loop condition for country list
     for (const auto& country : countries) {
+        //checking if new name already exist
         if (country.name == countryName) {
             cout << "Error: Country \"" << countryName << "\" already exists.\n";
             return true; // Indicates that the country exists
@@ -41,7 +45,7 @@ bool Data::isExist(const string& countryName) const {
     }
     return false; // Indicates the country does not exist
 }
-    
+//display the Countries
 void Data::display() const {
     if (isEmpty()) {
         cout << "Country database is empty." << endl;
@@ -49,6 +53,7 @@ void Data::display() const {
     }
 
     cout << "Countries in the database:" << endl;
+    //for loop condition for country list
     for (const auto& country : countries) {
         cout << "Name: " << country.name
              << ", Coordinates: (" << country.x << ", " << country.y << ")"
