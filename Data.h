@@ -24,8 +24,10 @@ public:
     int binarySearchByCoordinates(double xCoord, double yCoord);
     //sorts
     void quickSortbyName(int left, int right);
-    // Displays all countries
+    void quickSortByPopulation(int left, int right);
+    // Displays - Cal distance
     void display();
+    int distance(int a,int b);
     //functions to limit the errors
     bool isEmpty();
     bool isExist(const string& countryName);
