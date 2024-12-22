@@ -282,7 +282,7 @@ bool Data::isExist(const string& countryName,double xCoord,double yCoord) const 
 
 
 //start of distance function ---
-int Data::distance(double result){
+double Data::distance(double result){
     
     int index1, index2;
         // Display countries for the user to choose from
