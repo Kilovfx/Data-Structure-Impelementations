@@ -1,5 +1,5 @@
 #ifndef DATA_H
-#define DATA_h
+#define DATA_H
 
 #include "Country.h"
 #include <vector>
