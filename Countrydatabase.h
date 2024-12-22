@@ -1,19 +1,26 @@
-#ifndef COUNTRYDATABASE_H
-#define COUNTRYDATABASE_H
+#ifndef DATA_H
+#define DATA_h
+
 #include "Country.h"
-#include <iostream>
 #include <vector>
-using namespace std; 
+#include <algorithm>
+#include <iostream>
+#include <string>
 
+using namespace std;
+class Data {
+private:
+    vector<Country> countries;
 
-Class data {
+public:
+    // Adds a new country
+    void insert(const Country& country);
 
-  private:
-  Country *countries;
-  int size;           // Current number of countries
-  int capacity;
+    // Deletes a country by name
+    void deleteCountry(const string& countryName);
 
+    // Displays all countries
+    void display();
+};
 
-
-  
-}
+#endif // COUNTRYMANAGER_H
