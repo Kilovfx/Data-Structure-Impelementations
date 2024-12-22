@@ -398,7 +398,7 @@ void Data::display() const {
 //start of save to file function  : ->
 void Data::saveCountryToFile(const vector<Country>& countries, const string &filename){
  //define the txt name   
- ofstream datafile(filename.txt);
+ ofstream datafile(filename); 
  // Check if the file was opened successfully
     if (!datafile) {
         cout << "Error: Unable to open file " << filename << " for writing." << endl;
