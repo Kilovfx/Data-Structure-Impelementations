@@ -310,6 +310,8 @@ int Data::distance(double result){
 
              // Output the result
             cout << "Distance between " << countryA.name << " and " << countryB.name << ": " << result << " units.\n";
+
+            return result;
     
 }
 
