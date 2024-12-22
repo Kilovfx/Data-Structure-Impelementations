@@ -320,40 +320,62 @@ bool Data::isExist(const string& countryName,double xCoord,double yCoord) const 
 
 
 //start of distance function ---
-double Data::distance(double result){
-    
-    int index1, index2;
-        // Display countries for the user to choose from
-        cout << "Select two countries to calculate the distance:\n";
-        for (int i = 0; i < countries.size(); ++i) {
-            cout << i + 1 << ". " << countries[i].name << endl;
+double Data::distance(double result) {
+
+    string countryName1, countryName2;
+    bool found1 = false, found2 = false;
+    int index1 = -1, index2 = -1;
+
+    // Display countries for the user to choose from
+    cout << "Select two countries to calculate the distance:\n";
+    for (int i = 0; i < countries.size(); ++i) {
+        cout << countries[i].name << endl;
+    }
+
+    // Get the names of the countries
+    cout << "Enter the name of the first country: ";
+    cin >> countryName1;
+    cout << "Enter the name of the second country: ";
+    cin >> countryName2;
+
+    // Check if both countries exist
+    for (int i = 0; i < countries.size(); ++i) {
+        if (countries[i].name == countryName1) {
+            found1 = true;
+            index1 = i;
         }
-        cout << "Enter the number of the first country: ";
-        cin >> index1;
-        cout << "Enter the number of the second country: ";
-        cin >> index2;
-    
-         // Check if input is valid
-        if (index1 < 1 || index1 > countries.size() || index2 < 1 || index2 > countries.size()) {
-            cout << "Invalid input! Please choose valid countries.\n";
-            return;
+        if (countries[i].name == countryName2) {
+            found2 = true;
+            index2 = i;
         }
-            // Get the coordinates of the selected countries
-            Country countryA = countries[index1 - 1];
-            Country countryB = countries[index2 - 1];
+    }
 
-             // Calculate the distance between the two countries using the Euclidean formula
-             double result = sqrt((countryB.x - countryA.x) * (countryB.x - countryA.x) +
-                                  (countryB.y - countryA.y) * (countryB.y - countryA.y));
+    // If any country does not exist
+    if (!found1 || !found2) {
+        if (!found1) {
+            cout << "Error: Country \"" << countryName1 << "\" not found.\n";
+        }
+        if (!found2) {
+            cout << "Error: Country \"" << countryName2 << "\" not found.\n";
+        }
+        return -1; // Error, return -1
+    }
 
-             // Output the result
-            cout << "Distance between " << countryA.name << " and " << countryB.name << ": " << result << " units.\n";
+    // Get the coordinates of the selected countries
+    Country countryA = countries[index1];
+    Country countryB = countries[index2];
 
-            return result;
-    
+    // Calculate the distance between the two countries using the Euclidean formula
+    result = sqrt((countryB.x - countryA.x) * (countryB.x - countryA.x) +
+                  (countryB.y - countryA.y) * (countryB.y - countryA.y));
+
+    // Output the result
+    cout << "Distance between " << countryA.name << " and " << countryB.name << ": " << result << " units.\n";
+
+    return result;
 }
-
 //end of distance function ---
+
 
 
 
