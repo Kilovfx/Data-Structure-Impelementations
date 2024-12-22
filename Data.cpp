@@ -294,7 +294,7 @@ bool Data::isExist(const string& countryName,double xCoord,double yCoord) const 
     //for loop condition for country list
     for (int i = 0; i < countries.size(); ++i) {
         //checking if new name already exist
-        if (country[i].name == countryName) {
+        if (countries[i].name == countryName) {
             cout << "Error: Country  |" << countryName << "|  already exists."<<"or the coordinates are exist"<<endl;
             return true; // Indicates that the country exists
         }
@@ -414,7 +414,7 @@ void Data::saveCountryToFile(const vector<Country>& countries, const string &fil
     }
 
 // Close the file
-    outFile.close();
+    datafile.close();
     cout << "Countries have been saved to " << filename << " successfully." << endl;
 }
 
