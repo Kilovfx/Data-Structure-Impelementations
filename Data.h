@@ -21,6 +21,9 @@ public:
 
     // Displays all countries
     void display();
+    bool isEmpty();
+    bool isExist(const string& countryName);
+
 };
 
 #endif // COUNTRYMANAGER_H
