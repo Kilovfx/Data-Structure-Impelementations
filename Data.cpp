@@ -1,13 +1,8 @@
 #include "Data.h"
 
-
+// constructor 
 Data::Data() {
     cout << "Data initialized.\n";
-}
-
-Data::~Data() {
-    cout << "Data destroyed. Clearing resources...\n";
-    countries.clear();
 }
 
 //insert function
@@ -112,7 +107,7 @@ void Data::deleteCityByCoordinates(double xCoord, double yCoord) {
     return -1; // Indicates that the country was not found
 }
 
-int Data::binarySearchByCoordinates(double xCoord, double yCoord) const {
+int Data::binarySearchByCoordinates(double xCoord, double yCoord) {
     // Check if the country list is empty
     if (isEmpty()) {
         cout << "Error: The country database is empty." << endl;
@@ -122,8 +117,9 @@ int Data::binarySearchByCoordinates(double xCoord, double yCoord) const {
     // Binary Search for the country by coordinates using a for loop
     int left = 0;
     int right = countries.size() - 1;
-
     for (int i = left; i <= right; i++) {
+        
+        //condition of binarysearch for mid index
         int mid = left + (right - left) / 2;
 
         // Check if the coordinates at mid match the search coordinates
@@ -156,6 +152,8 @@ int Data::binarySearchByCoordinates(double xCoord, double yCoord) const {
 bool Data::isEmpty() const {
     return countries.empty();
 }
+//isEmpty Checking function --------
+
 
 
 
@@ -179,6 +177,8 @@ bool Data::isExist(const string& countryName,double xCoord,double yCoord) const 
 //End of isExist function
 
 
+
+
 //display the Countries
 void Data::display() const {
     if (isEmpty()) {
@@ -196,3 +196,13 @@ void Data::display() const {
 }
 
 //End of display function
+
+
+
+//destrctour 
+
+Data::~Data() {
+    cout << "Data destroyed. Clearing resources...\n";
+    countries.clear();
+}
+
