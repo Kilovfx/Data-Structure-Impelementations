@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
-
+#include <fstream>
 using namespace std;
 class Data {
 private:
@@ -32,6 +32,8 @@ public:
     //functions to limit the errors
     bool isEmpty();
     bool isExist(const string& countryName);
+    //files 
+    void saveCountryToFile(const vector<Country>& countries, const string &filename);
 
 };
 
