@@ -27,24 +27,50 @@ void Data::insertCountry(const Country& country) {
     cout << "Country   |" << country.name << "|  added successfully.\n";
 }
 
+//End of insert function
 
-//isEmpty Checking function
+
+
+//delete Country name
+void Data::deleteCountry(const string& countryName) {
+    if (!isExist(countryName)) { // Check if the country exists
+        cout << "Error: Country \"" << countryName << "\" not found.\n";
+        return; // Exit if the country does not exist
+    }
+
+    for (int i = 0; i < countries.size(); ++i) {
+        if (countries[i].name == countryName) { // Find the country
+            countries.erase(countries.begin() + i); // Delete it
+            cout << "Country \"" << countryName << "\" deleted successfully.\n";
+            return; // Exit after deleting
+        }
+    }
+}
+//End of delete function
+
+
+//isEmpty Checking function --------
 bool Data::isEmpty() const {
     return countries.empty();
 }
 
+
+
 //isExist Checking function
 bool Data::isExist(const string& countryName) const {
     //for loop condition for country list
-    for (const auto& country : countries) {
+    for (int i = 0; i < countries.size(); ++i) {
         //checking if new name already exist
-        if (country.name == countryName) {
+        if (country[i].name == countryName) {
             cout << "Error: Country \"" << countryName << "\" already exists.\n";
             return true; // Indicates that the country exists
         }
     }
     return false; // Indicates the country does not exist
 }
+//End of isExist function
+
+
 //display the Countries
 void Data::display() const {
     if (isEmpty()) {
@@ -54,9 +80,11 @@ void Data::display() const {
 
     cout << "Countries in the database:" << endl;
     //for loop condition for country list
-    for (const auto& country : countries) {
-        cout << "Name: " << country.name
-             << ", Coordinates: (" << country.x << ", " << country.y << ")"
-             << ", Population: " << country.population << endl;
+    for (int i = 0; i < countries.size(); ++i) {
+        cout << "Name: " << country[i].name
+             << ", Coordinates: (" << country[i].x << ", " << country[i].y << ")"
+             << ", Population: " << country[i].population << endl;
     }
 }
+
+//End of display function
