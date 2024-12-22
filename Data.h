@@ -20,8 +20,8 @@ public:
     void deleteCountry(const string& countryName);
     void deleteCityByCoordinates(double xCoord, double yCoord);
     //search function
-    void binarySearchByName(const string& countryName);
-    void binarySearchByCoordinates(double xCoord, double yCoord);
+    int binarySearchByName(const string& countryName);
+    int binarySearchByCoordinates(double xCoord, double yCoord);
     // Displays all countries
     void display();
     //functions to limit the errors
