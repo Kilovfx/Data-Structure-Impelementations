@@ -281,6 +281,42 @@ bool Data::isExist(const string& countryName,double xCoord,double yCoord) const 
 //End of isExist function
 
 
+//start of distance function ---
+int Data::distance(double result){
+    
+    int index1, index2;
+        // Display countries for the user to choose from
+        cout << "Select two countries to calculate the distance:\n";
+        for (int i = 0; i < countries.size(); ++i) {
+            cout << i + 1 << ". " << countries[i].name << endl;
+        }
+        cout << "Enter the number of the first country: ";
+        cin >> index1;
+        cout << "Enter the number of the second country: ";
+        cin >> index2;
+    
+         // Check if input is valid
+        if (index1 < 1 || index1 > countries.size() || index2 < 1 || index2 > countries.size()) {
+            cout << "Invalid input! Please choose valid countries.\n";
+            return;
+        }
+            // Get the coordinates of the selected countries
+            Country countryA = countries[index1 - 1];
+            Country countryB = countries[index2 - 1];
+
+             // Calculate the distance between the two countries using the Euclidean formula
+             double result = sqrt((countryB.x - countryA.x) * (countryB.x - countryA.x) +
+                                  (countryB.y - countryA.y) * (countryB.y - countryA.y));
+
+             // Output the result
+            cout << "Distance between " << countryA.name << " and " << countryB.name << ": " << result << " units.\n";
+    
+}
+
+//end of distance function ---
+
+
+
 
 
 //display the Countries
