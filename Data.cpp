@@ -71,6 +71,11 @@ void Data::deleteCityByCoordinates(double xCoord, double yCoord) {
 
     //End of CountrybyCooridnates function
 
+
+
+
+
+    //Search by name function start
     int Data::binarySearchByName(const string& countryName) const {
     // Check if the country list is empty
     if (isEmpty()) {
@@ -102,11 +107,19 @@ void Data::deleteCityByCoordinates(double xCoord, double yCoord) {
         }
     }
 
+        //end of search by name function
+
     // If we reach here, the country is not present
     cout << "Error: Country \"" << countryName << "\" not found in the database." << endl;
     return -1; // Indicates that the country was not found
 }
 
+//end of search by name function -------
+
+
+
+
+  //Search by coordinates function start
 int Data::binarySearchByCoordinates(double xCoord, double yCoord) {
     // Check if the country list is empty
     if (isEmpty()) {
@@ -143,9 +156,100 @@ int Data::binarySearchByCoordinates(double xCoord, double yCoord) {
     return -1; // Indicates that the country was not found
 }
 
+//end of search by coordinates function --------
 
 
 
+
+
+
+//start of quick sort by name function ----------
+void Data::quickSortByName(int left, int right)
+{
+    // Base case: if the subarray has 1 or 0 elements, it's already sorted.
+    if (left >= right) {
+        return;
+    }
+
+    // Step 1: Choose a pivot. We'll use the middle element of the range.
+    int pivotIndex = (left + right) / 2; // Middle element index
+    string pivotName = countries[pivotIndex].name;
+
+    // Step 2: Partition the array around the pivot
+    int i = left;
+    int j = right;
+    
+    while (i <= j) {
+        // Move i to the right until we find an element greater than the pivot
+        while (countries[i].name < pivotName) {
+            i++;
+        }
+
+        // Move j to the left until we find an element smaller than the pivot
+        while (countries[j].name > pivotName) {
+            j--;
+        }
+
+        // If i <= j, swap the elements and move i and j towards the middle
+        if (i <= j) {
+            swap(countries[i], countries[j]);
+            i++;
+            j--;
+        }
+    }
+
+    // Step 3: Recursively apply QuickSort to the left and right subarrays
+    if (left < j) {
+        quickSortByName(left, j); // Left part
+    }
+    if (i < right) {
+        quickSortByName(i, right); // Right part
+    }
+}
+//end of quick sort by name function 
+
+
+
+
+
+//start of quick sort by Population function 
+void Data::quickSortByPopulation(int left, int right) {
+    if (left < right) {
+        int pivotIndex = left + (right - left) / 2; // Middle element index
+        int pivotPopulation = countries[pivotIndex].population;
+
+        // Partition the array around the pivot
+        int i = left;
+        int j = right;
+
+        while (i <= j) {
+            // Move i to the right while countries[i].population < pivotPopulation
+            while (countries[i].population < pivotPopulation)
+                i++;
+
+            // Move j to the left while countries[j].population > pivotPopulation
+            while (countries[j].population > pivotPopulation)
+                j--;
+
+            if (i <= j) {
+                // Swap elements
+                swap(countries[i], countries[j]);
+                i++;
+                j--;
+            }
+        }
+
+        // Recursively sort the subarrays
+        if (left < j) {
+            quickSortByPopulation(left, j);
+        }
+        if (i < right) {
+            quickSortByPopulation(i, right);
+        }
+    }
+}
+
+//end of quick sort by Population function 
 
 
 //isEmpty Checking function --------
