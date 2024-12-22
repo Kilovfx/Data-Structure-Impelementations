@@ -5,6 +5,9 @@ Data::Data() {
     cout << "Data initialized.\n";
 }
 
+
+
+
 //insert function
 void Data::insertCountry(const Country& country) {
     //Checking for country name empty 
@@ -26,6 +29,10 @@ void Data::insertCountry(const Country& country) {
 
 
 
+
+
+
+
 //delete Country name
 void Data::deleteCountry(const string& countryName) {
     if (!isExist(countryName)) { // Check if the country exists
@@ -42,6 +49,11 @@ void Data::deleteCountry(const string& countryName) {
     }
 }
 //End of delete function
+
+
+
+
+
 
 
 
@@ -71,6 +83,8 @@ void Data::deleteCityByCoordinates(double xCoord, double yCoord) {
 }
 
     //End of CountrybyCooridnates function
+
+
 
 
 
@@ -108,7 +122,6 @@ void Data::deleteCityByCoordinates(double xCoord, double yCoord) {
         }
     }
 
-        //end of search by name function
 
     // If we reach here, the country is not present
     cout << "Error: Country \"" << countryName << "\" not found in the database." << endl;
@@ -116,6 +129,11 @@ void Data::deleteCityByCoordinates(double xCoord, double yCoord) {
 }
 
 //end of search by name function -------
+
+
+
+
+
 
 
 
@@ -158,6 +176,9 @@ int Data::binarySearchByCoordinates(double xCoord, double yCoord) {
 }
 
 //end of search by coordinates function --------
+
+
+
 
 
 
@@ -213,6 +234,11 @@ void Data::quickSortByName(int left, int right)
 
 
 
+
+
+
+
+
 //start of quick sort by Population function 
 void Data::quickSortByPopulation(int left, int right) {
     if (left < right) {
@@ -253,11 +279,12 @@ void Data::quickSortByPopulation(int left, int right) {
 //end of quick sort by Population function 
 
 
-//isEmpty Checking function --------
-bool Data::isEmpty() const {
-    return countries.empty();
-}
-//isEmpty Checking function --------
+
+
+
+
+
+
 
 
 
@@ -280,6 +307,16 @@ bool Data::isExist(const string& countryName,double xCoord,double yCoord) const 
     return false; // Indicates the country does not exist
 }
 //End of isExist function
+
+
+
+
+
+
+
+
+
+
 
 
 //start of distance function ---
@@ -322,6 +359,14 @@ double Data::distance(double result){
 
 
 
+
+
+
+
+
+
+
+
 //display the Countries
 void Data::display() const {
     if (isEmpty()) {
@@ -342,10 +387,59 @@ void Data::display() const {
 
 
 
+
+
+
+
+
+
+
+
+//start of save to file function  : ->
+void Data::saveCountryToFile(const vector<Country>& countries, const string &filename){
+ //define the txt name   
+ ofstream datafile(filename.txt);
+ // Check if the file was opened successfully
+    if (!datafile) {
+        cout << "Error: Unable to open file " << filename << " for writing." << endl;
+        return;
+    }
+
+    // Write the data of each country to the file using a for loop
+    for (int i = 0; i < countries.size(); ++i) {
+       datafile << countries[i].name << ","  // Write name
+                << countries[i].x << ","  // Write x coordinate
+                << countries[i].y << ","  // Write y coordinate
+                << countries[i].population << endl;  // Write population
+    }
+
+// Close the file
+    outFile.close();
+    cout << "Countries have been saved to " << filename << " successfully." << endl;
+}
+
+
+//end of save to file function ---
+
+
+
+
+
+//isEmpty Checking function --------
+
+bool Data::isEmpty() const {
+    return countries.empty();
+}
+//isEmpty Checking function --------
+
+
+
 //destrctour 
 
 Data::~Data() {
     cout << "Data destroyed. Clearing resources...\n";
     countries.clear();
 }
+
+
 
