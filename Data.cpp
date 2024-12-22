@@ -63,16 +63,93 @@ void Data::deleteCityByCoordinates(double xCoord, double yCoord) {
     for (int i = 0; i < countries.size(); ++i) {
         if (countries[i].x == xCoord && countries[i].y == yCoord) {
             // Remove the country from the list
-            cout << "Country \"" << countries[i].name << "\" at coordinates (" 
+            cout << "Country   |" << countries[i].name << "|  at coordinates (" 
                  << xCoord << ", " << yCoord << ") has been deleted." << endl;
+            //delete the country that i pointing to ->
             countries.erase(countries.begin() + i);
             return;
         }
     }
-
     // If no matching country is found
     cout << "Error: No country found at coordinates (" << xCoord << ", " << yCoord << ")." << endl;
 }
+
+    //End of CountrybyCooridnates function
+
+    int Data::binarySearchByName(const string& countryName) const {
+    // Check if the country list is empty
+    if (isEmpty()) {
+        cout << "Error: The country database is empty." << endl;
+        return -1; // Indicates that the database is empty
+    }
+
+    // Binary Search for the country by name using a for loop
+    int left = 0;
+    int right = countries.size() - 1;
+
+    for (int i = left; i <= right; i++) {
+        //condition of binarysearch for mid index
+        int mid = left + (right - left) / 2;
+
+        // Check if the country name at mid is equal to the searched name
+        if (countries[mid].name == countryName) {
+            cout << "Country found at index " << mid << ": " << countries[mid].name
+                 << ", Coordinates: (" << countries[mid].x << ", " << countries[mid].y
+                 << "), Population: " << countries[mid].population << endl;
+            return mid; // Country found, return the index
+        }
+
+        // Adjust the search range based on the comparison
+        if (countries[mid].name < countryName) {
+            left = mid + 1; // Move the left pointer to mid + 1
+        } else {
+            right = mid - 1; // Move the right pointer to mid - 1
+        }
+    }
+
+    // If we reach here, the country is not present
+    cout << "Error: Country \"" << countryName << "\" not found in the database." << endl;
+    return -1; // Indicates that the country was not found
+}
+
+int Data::binarySearchByCoordinates(double xCoord, double yCoord) const {
+    // Check if the country list is empty
+    if (isEmpty()) {
+        cout << "Error: The country database is empty." << endl;
+        return -1; // Indicates that the database is empty
+    }
+
+    // Binary Search for the country by coordinates using a for loop
+    int left = 0;
+    int right = countries.size() - 1;
+
+    for (int i = left; i <= right; i++) {
+        int mid = left + (right - left) / 2;
+
+        // Check if the coordinates at mid match the search coordinates
+        if (countries[mid].x == xCoord && countries[mid].y == yCoord) {
+            cout << "Country found at index " << mid << ": " << countries[mid].name
+                 << ", Coordinates: (" << countries[mid].x << ", " << countries[mid].y
+                 << "), Population: " << countries[mid].population << endl;
+            return mid; // Country found, return the index
+        }
+
+        // Adjust the search range based on the comparison of coordinates
+        if (countries[mid].x < xCoord || (countries[mid].x == xCoord && countries[mid].y < yCoord)) {
+            left = mid + 1; // Move the left pointer to mid + 1
+        } else {
+            right = mid - 1; // Move the right pointer to mid - 1
+        }
+    }
+
+    // If we reach here, the coordinates are not present
+    cout << "Error: Country with coordinates (" << xCoord << ", " << yCoord << ") not found." << endl;
+    return -1; // Indicates that the country was not found
+}
+
+
+
+
 
 
 //isEmpty Checking function --------
