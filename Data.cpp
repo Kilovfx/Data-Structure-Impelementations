@@ -49,6 +49,32 @@ void Data::deleteCountry(const string& countryName) {
 //End of delete function
 
 
+
+//delete CountrybyCooridnates 
+
+void Data::deleteCityByCoordinates(double xCoord, double yCoord) {
+    // Check if the database is empty
+    if (isEmpty()) {
+        cout << "Error: The database is empty. No country to delete." << endl;
+        return;
+    }
+
+    // Use a loop to find the country with the matching coordinates
+    for (int i = 0; i < countries.size(); ++i) {
+        if (countries[i].x == xCoord && countries[i].y == yCoord) {
+            // Remove the country from the list
+            cout << "Country \"" << countries[i].name << "\" at coordinates (" 
+                 << xCoord << ", " << yCoord << ") has been deleted." << endl;
+            countries.erase(countries.begin() + i);
+            return;
+        }
+    }
+
+    // If no matching country is found
+    cout << "Error: No country found at coordinates (" << xCoord << ", " << yCoord << ")." << endl;
+}
+
+
 //isEmpty Checking function --------
 bool Data::isEmpty() const {
     return countries.empty();
@@ -57,14 +83,19 @@ bool Data::isEmpty() const {
 
 
 //isExist Checking function
-bool Data::isExist(const string& countryName) const {
+bool Data::isExist(const string& countryName,double xCoord,double yCoord) const {
     //for loop condition for country list
     for (int i = 0; i < countries.size(); ++i) {
         //checking if new name already exist
         if (country[i].name == countryName) {
-            cout << "Error: Country \"" << countryName << "\" already exists.\n";
+            cout << "Error: Country  |" << countryName << "|  already exists."<<"or the coordinates are exist"<<endl;
             return true; // Indicates that the country exists
         }
+        if (countries[i].x == xCoord && countries[i].y == yCoord) {
+            cout << "Error: Coordinates (" << xCoord << ", " << yCoord << ") already exist." << endl;
+            return true; // Coordinates already exist
+        }
+    }
     }
     return false; // Indicates the country does not exist
 }
