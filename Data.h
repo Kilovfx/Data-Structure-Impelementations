@@ -27,7 +27,7 @@ public:
     void quickSortByPopulation(int left, int right);
     // Displays - Cal distance
     void display();
-    int distance(int a,int b);
+    double distance(double result);
     //functions to limit the errors
     bool isEmpty();
     bool isExist(const string& countryName);
