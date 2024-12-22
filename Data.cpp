@@ -20,7 +20,7 @@ void Data::insertCountry(const Country& country) {
         cout << "Error: Country  |" << country.name << " | already exists in the database.\n";
         return;
     }
-    //insert a new country
+    //insert as an arraylist
     countries.push_back(country);
     cout << "Country   |" << country.name << "|  added successfully.\n";
 }
