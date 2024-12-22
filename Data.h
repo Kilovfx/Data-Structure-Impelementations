@@ -19,7 +19,7 @@ public:
      Data();
     ~Data();
     // Adds a new country
-    void insert(const Country& country);
+    void insertCountry(const Country& country);
     // Deletes a country by name
     void deleteCountry(const string& countryName);
     void deleteCityByCoordinates(double xCoord, double yCoord);
