@@ -100,7 +100,7 @@ void Data::deleteCityByCoordinates(double xCoord, double yCoord) {
 
 
     //Search by name function start
-    int Data::binarySearchByName(const string& countryName) const {
+    int Data::binarySearchByName(const string& countryName) {
     // Check if the country list is empty
     if (isEmpty()) {
         cout << "Error: The country database is empty." << endl;
