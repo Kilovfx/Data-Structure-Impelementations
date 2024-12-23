@@ -178,62 +178,52 @@ int Data::binarySearchByCoordinates(double xCoord, double yCoord) {
 //end of search by coordinates function --------
 
 
-#include <cmath>
-#include <vector>
-#include <iostream>
-#include <limits>
-#include <algorithm> // For std::swap
 
-using namespace std;
+
+
+
+
 
 void Data::findNearestCountry(const string& countryName, int n) {
-    // Check if the country list is empty
-    if (isEmpty()) {
+    if (countries.empty()) {
         cout << "Country database is empty." << endl;
         return;
     }
 
-    // Create arrays to store distances and country pointers
+    // Allocate raw arrays
     double distances[countries.size()];
     const Country* nearestCountries[countries.size()];
 
     // Find the target country by name
-    int targetIndex = -1;
+    const Country* targetCountry = nullptr;
     for (int i = 0; i < countries.size(); ++i) {
         if (countries[i].name == countryName) {
-            targetIndex = i;
+            targetCountry = &countries[i];
             break;
         }
     }
 
-    // If the target country is not found
-    if (targetIndex == -1) {
+    if (!targetCountry) {
         cout << "Error: Country \"" << countryName << "\" not found." << endl;
         return;
     }
 
-    // Get the coordinates of the target country
-    Country targetCountry = countries[targetIndex];
-
-    // Calculate distances for all countries from the target country
+    // Calculate distances for all countries
     for (int i = 0; i < countries.size(); ++i) {
-        if (i == targetIndex) {
-            distances[i] = numeric_limits<double>::max(); // Set distance to max for the target itself
-        } else {
-            // Calculate Euclidean distance
-            distances[i] = sqrt(pow(countries[i].x - targetCountry.x, 2) + pow(countries[i].y - targetCountry.y, 2));
-        }
-        nearestCountries[i] = &countries[i];  // Store the country pointer
+    if (&countries[i] != targetCountry) { // Skip the target country itself and calc other countires distance
+        distances[i] = sqrt(pow(countries[i].x - targetCountry->x, 2) +
+                            pow(countries[i].y - targetCountry->y, 2));
+        nearestCountries[i] = &countries[i];
     }
+}
 
-    // Perform a simple bubble sort to find the n nearest countries
+    // Perform a bubble sort to find the n nearest countries
     for (int i = 0; i < countries.size() - 1; ++i) {
         for (int j = 0; j < countries.size() - i - 1; ++j) {
             if (distances[j] > distances[j + 1]) {
-                // Swap distances using swap
+                // Swap distances 
                 swap(distances[j], distances[j + 1]);
-
-                // Swap country pointers using swap
+                // Swap country pointers
                 swap(nearestCountries[j], nearestCountries[j + 1]);
             }
         }
@@ -241,12 +231,18 @@ void Data::findNearestCountry(const string& countryName, int n) {
 
     // Display the n nearest countries
     cout << "Nearest " << n << " countries to " << countryName << ":" << endl;
-    for (int i = 0; i < min(n, (int)countries.size() - 1); ++i) {
+    for (int i = 0; i < min(n, (int)countries.size()); ++i) {
         cout << "Name: " << nearestCountries[i]->name << ", Coordinates: (" 
              << nearestCountries[i]->x << ", " << nearestCountries[i]->y 
              << "), Distance: " << distances[i] << " units." << endl;
     }
 }
+//end of nearest country function
+
+
+
+
+
 
 
 
