@@ -178,6 +178,75 @@ int Data::binarySearchByCoordinates(double xCoord, double yCoord) {
 //end of search by coordinates function --------
 
 
+#include <cmath>
+#include <vector>
+#include <iostream>
+#include <limits>
+#include <algorithm> // For std::swap
+
+using namespace std;
+
+void Data::findNearestCountry(const string& countryName, int n) {
+    // Check if the country list is empty
+    if (isEmpty()) {
+        cout << "Country database is empty." << endl;
+        return;
+    }
+
+    // Create arrays to store distances and country pointers
+    double distances[countries.size()];
+    const Country* nearestCountries[countries.size()];
+
+    // Find the target country by name
+    int targetIndex = -1;
+    for (int i = 0; i < countries.size(); ++i) {
+        if (countries[i].name == countryName) {
+            targetIndex = i;
+            break;
+        }
+    }
+
+    // If the target country is not found
+    if (targetIndex == -1) {
+        cout << "Error: Country \"" << countryName << "\" not found." << endl;
+        return;
+    }
+
+    // Get the coordinates of the target country
+    Country targetCountry = countries[targetIndex];
+
+    // Calculate distances for all countries from the target country
+    for (int i = 0; i < countries.size(); ++i) {
+        if (i == targetIndex) {
+            distances[i] = numeric_limits<double>::max(); // Set distance to max for the target itself
+        } else {
+            // Calculate Euclidean distance
+            distances[i] = sqrt(pow(countries[i].x - targetCountry.x, 2) + pow(countries[i].y - targetCountry.y, 2));
+        }
+        nearestCountries[i] = &countries[i];  // Store the country pointer
+    }
+
+    // Perform a simple bubble sort to find the n nearest countries
+    for (int i = 0; i < countries.size() - 1; ++i) {
+        for (int j = 0; j < countries.size() - i - 1; ++j) {
+            if (distances[j] > distances[j + 1]) {
+                // Swap distances using swap
+                swap(distances[j], distances[j + 1]);
+
+                // Swap country pointers using swap
+                swap(nearestCountries[j], nearestCountries[j + 1]);
+            }
+        }
+    }
+
+    // Display the n nearest countries
+    cout << "Nearest " << n << " countries to " << countryName << ":" << endl;
+    for (int i = 0; i < min(n, (int)countries.size() - 1); ++i) {
+        cout << "Name: " << nearestCountries[i]->name << ", Coordinates: (" 
+             << nearestCountries[i]->x << ", " << nearestCountries[i]->y 
+             << "), Distance: " << distances[i] << " units." << endl;
+    }
+}
 
 
 
