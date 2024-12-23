@@ -2,12 +2,13 @@
 #define DATA_H
 
 #include "Country.h"
+#include <iostream>
 #include <vector>
 #include <algorithm>
-#include <iostream>
 #include <string>
 #include <cmath>
 #include <fstream>
+
 using namespace std;
 class Data {
 private:
@@ -32,6 +33,7 @@ public:
     // Displays - Cal distance
     void display();
     double distance(double result);
+    void findNearestCountry(const string& countryName, int n)
     //functions to limit the errors
     bool isEmpty();
     bool isExist(const string& countryName);
