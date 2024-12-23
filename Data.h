@@ -46,8 +46,8 @@ public:
 
     // Functions to limit errors
     bool isEmpty() const;
-    bool isExist(const string& countryName, double xCoord, double yCoord) const;
-
+    bool isCountryExist(const string& countryName) const;
+    bool isCoordinatesExist(double xCoord, double yCoord) const;
     // File saving
     void saveCountryToFile(const vector<Country>& countries, const string& filename);
 };
