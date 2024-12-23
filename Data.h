@@ -10,35 +10,46 @@
 #include <fstream>
 
 using namespace std;
+
 class Data {
 private:
     vector<Country> countries;
 
 public:
-
-    //constructor and destrctor
-     Data();
+    // Constructor and Destructor
+    Data();
     ~Data();
+
     // Adds a new country
     void insertCountry(const Country& country);
+
     // Deletes a country by name
     void deleteCountry(const string& countryName);
+
+    // Deletes a country by coordinates
     void deleteCityByCoordinates(double xCoord, double yCoord);
-    //search function
+
+    // Search functions
     int binarySearchByName(const string& countryName);
     int binarySearchByCoordinates(double xCoord, double yCoord);
-    //sorts
-    void quickSortbyName(int left, int right);
+
+    // Sort functions
+    void quickSortByName(int left, int right);
     void quickSortByPopulation(int left, int right);
-    // Displays - Cal distance
+
+    // Display functions
     void display();
+
+    //distance functions
     double distance(double result);
-    void findNearestCountry(const string& countryName, int n)
-    //functions to limit the errors
-    bool isEmpty();
-    bool isExist(const string& countryName);
-    //files 
-    void saveCountryToFile(const vector<Country>& countries, const string &filename);
+    void findNearestCountry(const string& countryName, int n);
+
+    // Functions to limit errors
+    bool isEmpty() const;
+    bool isExist(const string& countryName, double xCoord, double yCoord) const;
+
+    // File saving
+    void saveCountryToFile(const vector<Country>& countries, const string& filename);
 };
 
-#endif // COUNTRYMANAGER_H
+#endif // DATA_H
