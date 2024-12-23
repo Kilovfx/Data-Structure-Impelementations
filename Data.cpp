@@ -15,14 +15,21 @@ void Data::insertCountry(const Country& country) {
         cout << "Error: Country name cannot be empty.\n";
         return;
     }
-    //Checking if the name already exist
-    if (isExist(country.name)) {
-        cout << "Error: Country  |" << country.name << " | already exists in the database.\n";
+    //Checking if the name nor coordinates already exist
+    if (isCountryExist(country.name) || isCoordinatesExist(country.x, country.y)) {
+        cout << "Error: Country or coordinates already exist.\n";
+        return;
+    }
+    
+    // Check if the coordinates are valid (non-negative)
+    if (country.x < 0 || country.y < 0) { // Or other validation rules
+        cout << "Error: Invalid coordinates (" << country.x << ", " << country.y << ").\n";
         return;
     }
     //insert as an arraylist
     countries.push_back(country);
     cout << "Country   |" << country.name << "|  added successfully.\n";
+    
 }
 
 //End of insert function
@@ -35,11 +42,12 @@ void Data::insertCountry(const Country& country) {
 
 //delete Country name
 void Data::deleteCountry(const string& countryName) {
-    if (!isExist(countryName)) { // Check if the country exists
-        cout << "Error: Country \"" << countryName << "\" not found.\n";
-        return; // Exit if the country does not exist
+    //Error handling
+    if (!isCountryExist(countryName)) {
+        cout << "Error: Country not found.\n";  // error message
+        return;
     }
-
+    //for loop to check the target name
     for (int i = 0; i < countries.size(); ++i) {
         if (countries[i].name == countryName) { // Find the country
             countries.erase(countries.begin() + i); // Delete it
@@ -49,6 +57,7 @@ void Data::deleteCountry(const string& countryName) {
     }
 }
 //End of delete function
+
 
 
 
@@ -354,22 +363,25 @@ void Data::quickSortByPopulation(int left, int right) {
 
 
 
-//isExist Checking function
-bool Data::isExist(const string& countryName,double xCoord,double yCoord) const {
-    //for loop condition for country list
+//isExist name Checking function
+bool Data::isCountryExist(const string& countryName) const {
     for (int i = 0; i < countries.size(); ++i) {
-        //checking if new name already exist
         if (countries[i].name == countryName) {
-            cout << "Error: Country  |" << countryName << "|  already exists."<<"or the coordinates are exist"<<endl;
-            return true; // Indicates that the country exists
+            return true; // Country name exist
         }
+    }
+    return false;
+}
+
+
+//isExist Coordinates Checking function
+bool Data::isCoordinatesExist(double xCoord, double yCoord) const {
+    for (int i = 0; i < countries.size(); ++i) {
         if (countries[i].x == xCoord && countries[i].y == yCoord) {
-            cout << "Error: Coordinates (" << xCoord << ", " << yCoord << ") already exist." << endl;
-            return true; // Coordinates already exist
+            return true; // Coordinates exist
         }
     }
-    }
-    return false; // Indicates the country does not exist
+    return false;
 }
 //End of isExist function
 
@@ -385,7 +397,7 @@ bool Data::isExist(const string& countryName,double xCoord,double yCoord) const 
 
 
 //start of distance function ---
-double Data::distance(double result) {
+double Data::distance() {
 
     string countryName1, countryName2;
     bool found1 = false, found2 = false;
@@ -431,8 +443,8 @@ double Data::distance(double result) {
     Country countryB = countries[index2];
 
     // Calculate the distance between the two countries using the Euclidean formula
-    result = sqrt((countryB.x - countryA.x) * (countryB.x - countryA.x) +
-                  (countryB.y - countryA.y) * (countryB.y - countryA.y));
+    double result = sqrt((countryB.x - countryA.x) * (countryB.x - countryA.x) +
+                        (countryB.y - countryA.y) * (countryB.y - countryA.y));
 
     // Output the result
     cout << "Distance between " << countryA.name << " and " << countryB.name << ": " << result << " units.\n";
@@ -464,9 +476,9 @@ void Data::display() const {
     cout << "Countries in the database:" << endl;
     //for loop condition for country list
     for (int i = 0; i < countries.size(); ++i) {
-        cout << "Name: " << country[i].name
-             << ", Coordinates: (" << country[i].x << ", " << country[i].y << ")"
-             << ", Population: " << country[i].population << endl;
+        cout << "Name: " << countries[i].name
+             << ", Coordinates: (" << countries[i].x << ", " << countries[i].y << ")"
+             << ", Population: " << countries[i].population << endl;
     }
 }
 
