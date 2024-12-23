@@ -38,7 +38,7 @@ public:
     void quickSortByPopulation(int left, int right);
 
     // Display functions
-    void display();
+    void display() const;
 
     //distance functions
     double distance(double result);
