@@ -41,7 +41,7 @@ public:
     void display() const;
 
     //distance functions
-    double distance(double result);
+    double distance();
     void findNearestCountry(const string& countryName, int n);
 
     // Functions to limit errors
