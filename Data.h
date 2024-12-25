@@ -22,7 +22,7 @@ public:
 
     // Adds a new country
     void insertCountry(const Country& country);
-
+    const vector<Country>& getCountries() const;
     // Deletes a country by name
     void deleteCountry(const string& countryName);
 
