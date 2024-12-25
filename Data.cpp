@@ -6,6 +6,13 @@ Data::Data() {
 }
 
 
+// Getter for the countries vector
+const vector<Country>& Data::getCountries() const {
+    return countries;
+}
+
+
+
 
 
 //insert function
